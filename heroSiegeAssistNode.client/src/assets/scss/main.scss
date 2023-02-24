@@ -1,0 +1,71 @@
+@import "./_variables.scss";
+@import "bootstrap";
+@import "./_overrides.scss";
+@import "./_utilities.scss";
+@import "./loaders.scss";
+
+body{
+  overscroll-behavior: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--body-bg);
+}
+
+main {
+  flex-grow: 1;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+textarea,
+select {
+  &:not(:placeholder-shown) {
+    &:valid {
+      border: 1px solid $success;
+    }
+    &:invalid {
+      border: 1px solid $danger;
+    }
+  }
+}
+
+form:invalid button[type="submit"] {
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+.text-visible {
+  text-shadow: 2px 0 2px rgba(0, 0, 0, 0.644), 0 2px 2px rgba(0, 0, 0, 0.644), -2px 0 2px rgba(0, 0, 0, 0.644), 0 -2px 2px rgba(0, 0, 0, 0.644), 0 0 10px rgba(255, 4, 4, 0.846);
+  // color: rgb(241, 231, 231);
+  color: rgba(0,255,255, 1);
+  font-weight: 700;
+  letter-spacing: 0.035rem;
+
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.flex-shrink {
+  flex-shrink: 1;
+}
+
+.hidden {
+  display: none;
+}
