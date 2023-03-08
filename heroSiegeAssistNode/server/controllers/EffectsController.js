@@ -1,3 +1,4 @@
+import { effectsService } from "../services/EffectsService";
 import BaseController from "../utils/BaseController";
 
 export class EffectsController extends BaseController {
@@ -12,7 +13,8 @@ export class EffectsController extends BaseController {
 
   async getEffectsText(req, res, next) {
     try {
-      res.send("Getting effects text!")
+      const effects = await effectsService.getEffectsText()
+      res.send(effects)
     }
     catch(error) {
       next(error)

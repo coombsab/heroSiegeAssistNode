@@ -1,5 +1,6 @@
 export class Rune {
   constructor(data) {
+    this.id = data.id || data._id
     this.name = data.name;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
@@ -7,6 +8,6 @@ export class Rune {
     this.tier = data.tier;
     this.dropRate = data.dropRate;
     this.img = data.img;
-    this.possibleRunewords = data.possibleRunewords;
+    this.possibleRunewords = data.possibleRunewords || [];
   }
 }

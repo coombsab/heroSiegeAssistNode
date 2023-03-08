@@ -5,10 +5,10 @@ const Schema = mongoose.Schema;
 
 export const RuneSchema = new Schema (
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     effect: { type: String, required: true },
     tier: { type: String, required: true },
-    dopRate: { type: String },
+    dropRate: { type: String },
     img: { type: String, required: true }
   }, SCHEMA_OPTIONS
 )

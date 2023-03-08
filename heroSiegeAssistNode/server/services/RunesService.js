@@ -28,8 +28,11 @@ class RunesService {
     return accounts
   }
 
-  async getRuneByName(query = {}) {
-    const rune = await dbContext.Runes.findOne(query)
+  async getRuneById(runeId) {
+    const rune = await dbContext.Runes.findById(runeId)
+    if (!rune) {
+      throw new BadRequest("Could not find a rune by that ID.")
+    }
     return rune
   }
 
@@ -63,6 +66,12 @@ class RunesService {
     myRune.quantity = runeData.quantity || myRune.quantity
 
     return myRune
+  }
+
+  async deleteRune(runeId) {
+    const rune = await this.getRuneById(runeId)
+    await rune.remove()
+    return rune
   }
 
   async deleteMyRune(runeId, accountId) {

@@ -1,11 +1,11 @@
 <template>
   <div class="runes" v-if="true">
     <div class="runes-container d-flex flex-wrap gap-4 justify-content-center">
-      <RuneCard v-for="r in runes" :key="r.name" :rune="r" />
+      <RuneCard v-for="r in runes" :key="r.id" :rune="r" />
     </div>
   </div>
   <div class="runes d-flex flex-column justify-content-center" v-else>
-    <RuneCard v-for="r in runes" :key="r.name" :rune="r" />
+    <RuneCard v-for="r in runes" :key="r.id" :rune="r" />
   </div>
   <AddButton :buttonText="'Add Rune'" :modalId="'addRuneModal'" />
   <AddModal :modalId="'addRuneModal'">
