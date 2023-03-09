@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 export const RunewordSchema = new Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     itemSlot: { type: String, required: true },
     itemType: { type: String, required: true }
   }, SCHEMA_OPTIONS

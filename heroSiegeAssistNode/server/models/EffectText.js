@@ -5,6 +5,6 @@ const Schema = mongoose.Schema;
 
 export const EffectTextSchema = new Schema(
   {
-    name: { type: String }
+    name: { type: String, unique: true }
   }, SCHEMA_OPTIONS
 )

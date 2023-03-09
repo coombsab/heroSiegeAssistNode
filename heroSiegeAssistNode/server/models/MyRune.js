@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 export const MyRuneSchema = new Schema (
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     effect: { type: String, required: true },
     tier: { type: String, required: true },
     dopRate: { type: String },

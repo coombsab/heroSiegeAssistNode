@@ -23,7 +23,8 @@ export class EffectsController extends BaseController {
 
   async addEffectText(req, res, next) {
     try {
-      res.send("Adding effect text!")
+      const effect = await effectsService.addEffectText(req.body)
+      res.send(effect)
     }
     catch(error) {
       next(error)
@@ -41,7 +42,8 @@ export class EffectsController extends BaseController {
 
   async deleteEffectText(req, res, next) {
     try {
-      res.send("Deleting an effect text!")
+      const effect = await effectsService.deleteEffectText(req.params.effectId)
+      res.send(effect)
     }
     catch(error) {
       next(error)
