@@ -9,6 +9,8 @@ export const RuneSchema = new Schema (
     effect: { type: String, required: true },
     tier: { type: String, required: true },
     dropRate: { type: String },
-    img: { type: String, required: true }
+    img: { type: String, required: true },
+
+    possibleRunewords: []
   }, SCHEMA_OPTIONS
 )

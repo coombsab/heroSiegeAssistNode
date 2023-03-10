@@ -6,6 +6,11 @@ export const RunewordSchema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     itemSlot: { type: String, required: true },
-    itemType: { type: String, required: true }
+    itemType: { type: String, required: true },
+
+    runes: [],
+    abilities: [],
+    effects: [],
+    items: []
   }, SCHEMA_OPTIONS
 )

@@ -1,3 +1,4 @@
+import { runewordsService } from "../services/RunewordsService";
 import BaseController from "../utils/BaseController";
 
 export class RunewordsController extends BaseController {
@@ -16,7 +17,8 @@ export class RunewordsController extends BaseController {
 
   async getRunewords(req, res, next) {
     try {
-      return res.send("Here are my runewords!")
+      const runewords = await runewordsService.getRunewords()
+      return res.send(runewords)
     }
     catch(error) {
       next(error)
@@ -25,7 +27,8 @@ export class RunewordsController extends BaseController {
 
   async addRuneword(req, res, next) {
     try {
-      return res.send("Added a runeword!")
+      const runeword = await runewordsService.addRuneword(req.body)
+      return res.send(runeword)
     }
     catch(error) {
       next(error)

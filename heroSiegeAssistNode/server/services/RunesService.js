@@ -1,9 +1,34 @@
 import { Forbidden, BadRequest } from "@bcwdev/auth0provider/lib/Errors"
 import { dbContext } from "../db/DbContext"
+import { logger } from "../utils/Logger"
 
 class RunesService {
   async getRunes(query = {}) {
     const runes = await dbContext.Runes.find(query)
+    await this.getPossibleRunewords(runes)
+
+    logger.log("Possible runewords")
+    runes.forEach(rune => {
+      logger.log(rune.name + ": " + rune.possibleRunewords.length)
+    })
+
+    return runes
+  }
+
+  async getPossibleRunewords(runes) {
+    const runewords = await dbContext.Runewords.find()
+    runes.forEach(rune => {
+      const possibleRunewords = []
+      runewords.forEach(runeword => {
+        runeword.runes.forEach(r => {
+          if (rune.name === r.name) {
+            possibleRunewords.push(runeword)
+          }
+        })
+      })
+      rune.possibleRunewords = possibleRunewords
+    })
+
     return runes
   }
 
@@ -32,6 +57,14 @@ class RunesService {
     const rune = await dbContext.Runes.findById(runeId)
     if (!rune) {
       throw new BadRequest("Could not find a rune by that ID.")
+    }
+    return rune
+  }
+
+  async getRuneByName(runeName) {
+    const rune = await dbContext.Runes.find({ name: runeName })
+    if (!rune) {
+      throw new BadRequest("Could not find a rune by the name: " + runeName)
     }
     return rune
   }
