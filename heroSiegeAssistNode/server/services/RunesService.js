@@ -100,7 +100,6 @@ class RunesService {
     return rune
   }
 
-  //*TODO - get possible runewords for an individual rune and for myrunes
   async addToMyRunes(runeData, accountId) {
     runeData.accountId = accountId
     const rune = await this.getRuneByName(runeData.name)
