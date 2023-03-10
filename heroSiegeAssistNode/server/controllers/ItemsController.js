@@ -1,3 +1,4 @@
+import { itemsService } from "../services/ItemsService";
 import BaseController from "../utils/BaseController";
 
 export class ItemsController extends BaseController {
@@ -12,7 +13,8 @@ export class ItemsController extends BaseController {
 
   async getItems(req, res, next) {
     try {
-      res.send("Getting items!")
+      const items = await itemsService.getItems()
+      res.send(items)
     }
     catch(error) {
       next(error)
@@ -21,7 +23,8 @@ export class ItemsController extends BaseController {
 
   async addItem(req, res, next) {
     try {
-      res.send("Adding an item!")
+      const item = await itemsService.addItem(req.body)
+      res.send(item)
     }
     catch(error) {
       next(error)
@@ -30,7 +33,8 @@ export class ItemsController extends BaseController {
   
   async editItem(req, res, next) {
     try {
-      res.send("Editing an item!")
+      const item = await itemsService.editItem(req.params.itemId, req.body)
+      res.send(item)
     }
     catch(error) {
       next(error)
@@ -39,7 +43,8 @@ export class ItemsController extends BaseController {
 
   async deleteItem(req, res, next) {
     try {
-      res.send("Deleting an item!")
+      const item = await itemsService.deleteItem(req.params.itemId)
+      res.send(item)
     }
     catch(error) {
       next(error)
