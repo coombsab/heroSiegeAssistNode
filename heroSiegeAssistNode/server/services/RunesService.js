@@ -10,6 +10,12 @@ class RunesService {
     return runes
   }
 
+  async getMyRunes(accountId) {
+    const myRunes = await dbContext.MyRunes.find({ accountId })
+    await this.getPossibleRunewords(myRunes)
+    return myRunes
+  }
+
   async getPossibleRunewords(runes) {
     const runewords = await dbContext.Runewords.find()
     runes.forEach(rune => {
@@ -57,7 +63,7 @@ class RunesService {
   }
 
   async getRuneByName(runeName) {
-    const rune = await dbContext.Runes.find({ name: runeName })
+    const rune = await dbContext.Runes.findOne({ name: runeName })
     if (!rune) {
       throw new BadRequest("Could not find a rune by the name: " + runeName)
     }
@@ -77,8 +83,14 @@ class RunesService {
     return rune
   }
 
+  //*TODO - get possible runewords for an individual rune
   async addToMyRunes(runeData, accountId) {
     runeData.accountId = accountId
+    const rune = await this.getRuneByName(runeData.name)
+    runeData.effect = rune.effect
+    runeData.tier = rune.tier
+    runeData.dropRate = rune.dropRate
+    runeData.img = rune.img
     const myRune = await dbContext.MyRunes.create(runeData)
     return myRune
   }

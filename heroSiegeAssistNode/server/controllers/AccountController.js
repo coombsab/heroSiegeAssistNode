@@ -1,5 +1,6 @@
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { accountService } from '../services/AccountService'
+import { runesService } from "../services/RunesService"
 import BaseController from '../utils/BaseController'
 
 export class AccountController extends BaseController {
@@ -26,7 +27,8 @@ export class AccountController extends BaseController {
 
   async getMyRunes(req, res, next) {
     try {
-      res.send("Getting my runes!")
+      const runes = await runesService.getMyRunes(req.userInfo.id)
+      res.send(runes)
     }
     catch(error) {
       next(error)
@@ -35,7 +37,8 @@ export class AccountController extends BaseController {
 
   async addToMyRunes(req, res, next) {
     try {
-      res.send("Adding another rune to my list!")
+      const rune = await runesService.addToMyRunes(req.body, req.userInfo.id)
+      res.send(rune)
     }
     catch(error) {
       next(error)
