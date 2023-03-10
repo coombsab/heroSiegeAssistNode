@@ -7,11 +7,6 @@ class RunesService {
     const runes = await dbContext.Runes.find(query)
     await this.getPossibleRunewords(runes)
 
-    logger.log("Possible runewords")
-    runes.forEach(rune => {
-      logger.log(rune.name + ": " + rune.possibleRunewords.length)
-    })
-
     return runes
   }
 
