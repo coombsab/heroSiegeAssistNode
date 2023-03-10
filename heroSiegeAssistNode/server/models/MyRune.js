@@ -12,7 +12,8 @@ export const MyRuneSchema = new Schema (
     img: { type: String, required: true },
     quantity: { type: Number, required: true },
 
-    accountId: { type: OBJECT_ID, required: true }
+    accountId: { type: OBJECT_ID, required: true },
+    possibleRunewords: []
   }, SCHEMA_OPTIONS
 )
 

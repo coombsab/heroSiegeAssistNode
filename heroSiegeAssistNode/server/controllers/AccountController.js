@@ -47,7 +47,10 @@ export class AccountController extends BaseController {
 
   async editMyRune(req, res, next) {
     try {
-      res.send("Editing one of my runes!")
+      let runeData = req.body
+      runeData.id = req.params.runeId
+      const rune = await runesService.editMyRune(runeData, req.userInfo.id)
+      res.send(rune)
     }
     catch(error) {
       next(error)
@@ -56,7 +59,8 @@ export class AccountController extends BaseController {
 
   async deleteMyRune(req, res, next) {
     try {
-      res.send("Deleting one of my runes!")
+      const rune = await runesService.deleteMyRune(req.params.runeId, req.userInfo.id)
+      res.send(rune)
     }
     catch(error) {
       next(error)

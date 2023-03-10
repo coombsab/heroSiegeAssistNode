@@ -18,17 +18,30 @@ class RunesService {
 
   async getPossibleRunewords(runes) {
     const runewords = await dbContext.Runewords.find()
-    runes.forEach(rune => {
-      const possibleRunewords = []
-      runewords.forEach(runeword => {
-        runeword.runes.forEach(r => {
-          if (rune.name === r.name) {
-            possibleRunewords.push(runeword)
-          }
+
+    if (runes.constructor === Array) {
+      runes.forEach(rune => {
+        const possibleRunewords = []
+        runewords.forEach(runeword => {
+          runeword.runes.forEach(r => {
+            if (rune.name === r.name) {
+              possibleRunewords.push(runeword)
+            }
+          })
         })
+        rune.possibleRunewords = possibleRunewords
       })
-      rune.possibleRunewords = possibleRunewords
-    })
+    } else {
+      const possibleRunewords = []
+        runewords.forEach(runeword => {
+          runeword.runes.forEach(r => {
+            if (runes.name === r.name) {
+              possibleRunewords.push(runeword)
+            }
+          })
+        })
+        runes.possibleRunewords = possibleRunewords
+    }
 
     return runes
   }
@@ -59,6 +72,7 @@ class RunesService {
     if (!rune) {
       throw new BadRequest("Could not find a rune by that ID.")
     }
+    await this.getPossibleRunewords(rune)
     return rune
   }
 
@@ -67,6 +81,7 @@ class RunesService {
     if (!rune) {
       throw new BadRequest("Could not find a rune by the name: " + runeName)
     }
+    await this.getPossibleRunewords(rune)
     return rune
   }
 
@@ -75,15 +90,17 @@ class RunesService {
     if (!myRune) {
       throw new BadRequest("Could not find a rune of yours by that ID.")
     }
+    await this.getPossibleRunewords(myRune)
     return myRune
   }
 
   async addRune(runeData) {
     const rune = await dbContext.Runes.create(runeData)
+    await this.getPossibleRunewords(rune)
     return rune
   }
 
-  //*TODO - get possible runewords for an individual rune
+  //*TODO - get possible runewords for an individual rune and for myrunes
   async addToMyRunes(runeData, accountId) {
     runeData.accountId = accountId
     const rune = await this.getRuneByName(runeData.name)
@@ -92,11 +109,12 @@ class RunesService {
     runeData.dropRate = rune.dropRate
     runeData.img = rune.img
     const myRune = await dbContext.MyRunes.create(runeData)
+    await this.getPossibleRunewords(myRune)
     return myRune
   }
 
   async editMyRune(runeData, accountId) {
-    const myRune = await dbContext.MyRunes.find(runeData.id)
+    const myRune = await this.getMyRuneById(runeData.id)
     // @ts-ignore
     if (myRune.accountId.toString() !== accountId) {
       throw new Forbidden("This is not your rune.")
