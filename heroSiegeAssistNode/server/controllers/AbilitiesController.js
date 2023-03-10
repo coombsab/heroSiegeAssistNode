@@ -1,3 +1,4 @@
+import { abilitesService } from "../services/AbilitiesService";
 import BaseController from "../utils/BaseController";
 
 export class AbilitiesController extends BaseController {
@@ -12,7 +13,8 @@ export class AbilitiesController extends BaseController {
 
   async getAbilities(req, res, next) {
     try {
-      res.send("Getting abilities!")
+      const abilities = await abilitesService.getAbilities()
+      res.send(abilities)
     }
     catch(error) {
       next(error)
@@ -21,7 +23,8 @@ export class AbilitiesController extends BaseController {
 
   async addAbility(req, res, next) {
     try {
-      res.send("Adding an ability!")
+      const ability = await abilitesService.addAbility(req.body)
+      res.send(ability)
     }
     catch(error) {
       next(error)
@@ -30,7 +33,8 @@ export class AbilitiesController extends BaseController {
 
   async editAbility(req, res, next) {
     try {
-      res.send("Editing an ability!")
+      const ability = await abilitesService.editAbility(req.params.abilityId, req.body)
+      res.send(ability)
     }
     catch(error) {
       next(error)
@@ -39,7 +43,8 @@ export class AbilitiesController extends BaseController {
 
   async deleteAbility(req, res, next) {
     try {
-      res.send("Deleting an ability!")
+      const ability = await abilitesService.deleteAbility(req.params.abilityId)
+      res.send(ability)
     }
     catch(error) {
       next(error)

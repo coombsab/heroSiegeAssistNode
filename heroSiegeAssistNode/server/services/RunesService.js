@@ -36,8 +36,8 @@ class RunesService {
     return rune
   }
 
-  async getMyRuneById(query = {}) {
-    const myRune = await dbContext.MyRunes.findOne(query)
+  async getMyRuneById(runeId) {
+    const myRune = await dbContext.MyRunes.findById(runeId)
     if (!myRune) {
       throw new BadRequest("Could not find a rune of yours by that ID.")
     }
