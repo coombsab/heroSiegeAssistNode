@@ -36,7 +36,8 @@ export class RunewordsController extends BaseController {
   }
   async editRuneword(req, res, next) {
     try {
-      return res.send("Edited the runeword!")
+      const runeword = await runewordsService.editRuneword(req.body, req.params.runewordId)
+      return res.send(runeword)
     }
     catch(error) {
       next(error)
@@ -45,7 +46,8 @@ export class RunewordsController extends BaseController {
 
   async deleteRuneword(req, res, next) {
     try {
-      return res.send("Deleted the runeword!")
+      const runeword = await runewordsService.deleteRuneword(req.params.runewordId)
+      return res.send(runeword)
     }
     catch(error) {
       next(error)
