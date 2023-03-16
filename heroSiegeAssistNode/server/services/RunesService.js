@@ -103,6 +103,10 @@ class RunesService {
   async addToMyRunes(runeData, accountId) {
     runeData.accountId = accountId
     const rune = await this.getRuneByName(runeData.name)
+    const alreadyOwnedRune = await dbContext.MyRunes.findOne({ name: rune.name, accountId: accountId })
+    if (alreadyOwnedRune) {
+      throw new BadRequest("You already have that rune added, please edit instead.")
+    }
     runeData.effect = rune.effect
     runeData.tier = rune.tier
     runeData.dropRate = rune.dropRate
