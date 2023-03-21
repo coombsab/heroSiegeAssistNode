@@ -12,6 +12,7 @@
       <div class="effects">
         <p class="m-0 text-center" v-for="e in runeword.effects" :key="e.id">{{ e.name }}</p>
       </div>
+      <RunewordCardOptions :runeword="runeword"/>
     </div>
   </div>
 </template>
@@ -53,6 +54,7 @@ export default {
   // box-shadow: 10px 5px 5px teal;
   // box-shadow: 0px 5px 10px 0px rgba(0, 255, 255, 0.7);
   box-shadow: 0.5px 0.5px 10px 0px rgba(0, 255, 255, 0.25), -0.5px -0.5px 10px 0px rgba(0, 255, 255, 0.25);
+  position: relative;
 }
 
 .runeword-card:hover {

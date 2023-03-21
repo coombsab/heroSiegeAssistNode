@@ -7,6 +7,9 @@
     <AddModal :modalId="'addRunewordModal'">
       <AddRunewordForm />
     </AddModal>
+    <AddModal :modalId="'editRunewordModal'">
+      <EditRunewordForm />
+    </AddModal>
   </div>
 </template>
 
