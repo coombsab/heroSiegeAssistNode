@@ -78,7 +78,9 @@ export default {
 
     async function getMyRunes() {
       try {
-        await accountService.getMyRunes()
+        if (loggedIn) {
+          await accountService.getMyRunes()
+        }
       }
       catch (error) {
         Pop.error(error.message, "[getMyRunes > RunewordsPage]")
@@ -91,7 +93,7 @@ export default {
       getAbilities()
       getEffectsText()
       getItems()
-      getMyRunes()
+      // getMyRunes()
     })
 
     return {
