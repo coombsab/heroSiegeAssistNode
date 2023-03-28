@@ -34,6 +34,16 @@ class RunewordsService {
     AppState.runewords.push(new Runeword(res.data))
   }
 
+  async editRuneword(runewordId, runewordData) {
+
+  }
+
+  async deleteRuneword(runewordId) {
+    // console.log("runewordId", runewordId)
+    const res = await api.delete("/api/runewords/" + runewordId)
+    AppState.runewords = AppState.runewords.filter(rw => rw.id !== runewordId)
+  }
+
   checkForRunewords() {
     let myRunesTemp = []
     AppState.possibleRunewords = []

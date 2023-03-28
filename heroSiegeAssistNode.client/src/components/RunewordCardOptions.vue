@@ -13,6 +13,7 @@
 <script>
 import { AppState } from "../AppState"
 import { accountService } from "../services/AccountService"
+import { runewordsService } from "../services/RunewordsService"
 import Pop from "../utils/Pop"
 
 export default {
@@ -35,7 +36,7 @@ export default {
         if (!yes) {
           return
         }
-
+        await runewordsService.deleteRuneword(props.runeword.id)
         
       },
       editRuneword() {

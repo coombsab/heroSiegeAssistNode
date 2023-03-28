@@ -50,7 +50,7 @@ export default {
       hasRune(rune) {
         const foundRune = AppState.myRunes.find(myRune => myRune.name === rune.name)
         let tempRune = tempRuneQuantities.find(r => r.name === rune.name)
-        console.log("temp rune", tempRune)
+        // console.log("temp rune", tempRune)
         if (!foundRune) {
           // console.log("Rune not found, darkening", rune.name)
           return "rune-darken"
@@ -69,16 +69,6 @@ export default {
             }
           }
         }
-        
-        
-        // if (tempRune.quantity === 0) {
-        //   console.log("Rune quantity 0, darkening", rune.name)
-        //   return "rune-darken"
-        // } else if (tempRune.quantity > 0) {
-        //   tempRune.quantity--
-        //   console.log("Brightening", rune.name)
-        //   return "rune-brighten"
-        // }
       }
     }
   }

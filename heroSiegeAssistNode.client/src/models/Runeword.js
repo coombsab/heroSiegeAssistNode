@@ -1,5 +1,6 @@
 export class Runeword {
   constructor(data) {
+    this.id = data.id || data._id
     this.name = data.name;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
