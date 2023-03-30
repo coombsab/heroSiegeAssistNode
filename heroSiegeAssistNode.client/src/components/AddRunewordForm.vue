@@ -152,7 +152,7 @@
 </template>
 
 <script>
-import { ref, computed } from "vue";
+import { ref, computed, onUpdated } from "vue";
 import { AppState } from "../AppState";
 import { abilitiesService } from "../services/AbilitiesService";
 import { effectsService } from "../services/EffectsService";

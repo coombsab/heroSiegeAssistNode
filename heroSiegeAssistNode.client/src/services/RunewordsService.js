@@ -35,13 +35,34 @@ class RunewordsService {
   }
 
   async editRuneword(runewordId, runewordData) {
-
+    console.log("Editing runeword in runewordsService")
   }
 
   async deleteRuneword(runewordId) {
     // console.log("runewordId", runewordId)
     const res = await api.delete("/api/runewords/" + runewordId)
     AppState.runewords = AppState.runewords.filter(rw => rw.id !== runewordId)
+  }
+
+  setActiveRuneword(runeword) {
+    // this.clearRunewordSubmission()
+    AppState.activeRuneword = runeword
+  }
+
+  clearRunewordSubmission() {
+    // console.log("Clearing temp info")
+    // console.log("effects before", AppState.tempEffects)
+    // console.log("abilities before", AppState.tempAbilities)
+    // console.log("runes before", AppState.tempRunes)
+    // console.log("items before", AppState.tempItems)
+    // AppState.tempEffects = []
+    // AppState.tempAbilities = []
+    // AppState.tempRunes = []
+    // AppState.tempItems = []
+    // console.log("effects after", AppState.tempEffects)
+    // console.log("abilities after", AppState.tempAbilities)
+    // console.log("runes after", AppState.tempRunes)
+    // console.log("items after", AppState.tempItems)
   }
 
   checkForRunewords() {

@@ -28,6 +28,7 @@ import { itemsService } from "../services/ItemsService";
 import { abilitiesService } from "../services/AbilitiesService";
 import { runesService } from "../services/RunesService";
 import { accountService } from "../services/AccountService";
+import EditRunewordForm from "../components/EditRunewordForm.vue";
 
 export default {
   setup() {
@@ -94,13 +95,20 @@ export default {
       getEffectsText()
       getItems()
       // getMyRunes()
+      const addRunewordModal = document.getElementById('addRunewordModal')
+      const editRunewordModal = document.getElementById('editRunewordModal')
+      addRunewordModal.addEventListener("show.bs.modal", runewordsService.clearRunewordSubmission)
+      editRunewordModal.addEventListener("show.bs.modal", runewordsService.clearRunewordSubmission)
     })
 
     return {
-      runewords: computed(() => AppState.runewords.sort((a, b) => a.name.localeCompare(b.name)))
+      runewords: computed(() => AppState.runewords.sort((a, b) => a.name.localeCompare(b.name))),
+      // clearRunewordSubmission() {
+      //   runewordsService.clearRunewordSubmission()
+      // }
     };
   },
-  components: { RunewordCard, AddModal, AddButton, AddRunewordForm }
+  components: { RunewordCard, AddModal, AddButton, AddRunewordForm, EditRunewordForm }
 }
 </script>
 

@@ -5,7 +5,7 @@
   <div class="popover-wrapper px-2 hidden" :id="'popover-' + runeword.name">
     <div class="popover-content gap-2">
       <button @click="deleteRuneword()"><i class="mdi mdi-delete"></i></button>
-      <button @click="editRuneword()" data-bs-toggle="modal" :data-bs-target="'#editRunewordModal'"><i class="mdi mdi-cog"></i></button>
+      <button @click="editRuneword(runeword)" data-bs-toggle="modal" :data-bs-target="'#editRunewordModal'"><i class="mdi mdi-cog"></i></button>
     </div>
   </div>
 </template>
@@ -39,8 +39,8 @@ export default {
         await runewordsService.deleteRuneword(props.runeword.id)
         
       },
-      editRuneword() {
-
+      editRuneword(runeword) {
+        runewordsService.setActiveRuneword(runeword)
       }
     }
   }
