@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO probably need to rework this whole thing -->
   <div class="add-runeword-form">
     <div class="title mb-3 px-3 d-flex justify-content-between align-items-center">
       <p class="fs-4 m-0 text-visible">Edit Runeword</p>
@@ -117,7 +118,7 @@
           <div class="col-12 mb-3">
             <p class="m-0 text-secondary text-lighten-3 fw-1 px-1">Runes Added:</p>
             <div class="d-flex gap-1 align-items-center justify-content-between added-item"
-              v-for="(r, index) in tempRunes">
+              v-for="(r, index) in tempRunes" :key="'edit-' + r + '-' + index">
               <p class="m-0 text-secondary no-select">{{ r }}</p>
               <button type="button" @click.stop="removeRune(index)"><i
                   class="mdi mdi-delete-circle text-secondary"></i></button>

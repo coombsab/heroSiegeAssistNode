@@ -22,7 +22,11 @@ class RunesService {
   }
 
   removeRuneFromRunewordSubmission(index) {
+    console.log(AppState.tempRunes)
+    console.log("Removing rune from index", index)
+    console.log(AppState.tempRunes[index])
     AppState.tempRunes.splice(index, 1)
+    console.log(AppState.tempRunes)
   }
 }
 
