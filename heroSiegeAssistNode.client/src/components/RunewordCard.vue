@@ -13,6 +13,9 @@
       <div class="effects">
         <p class="m-0 text-center" v-for="e in runeword.effects" :key="e.id">{{ e.name }}</p>
       </div>
+      <div class="abilities">
+        <p class="m-0 text-center" v-for="a in runeword.abilities" :key="a.id">{{  a.name }}</p>
+      </div>
       <RunewordCardOptions :runeword="runeword" />
     </div>
   </div>
