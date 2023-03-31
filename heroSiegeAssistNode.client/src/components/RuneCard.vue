@@ -1,8 +1,9 @@
 <template>
-  <div class="rune-card" :class="rune.possibleRunewords?.length === 0 || ! rune.possibleRunewords ? 'empty' : ''">
+  <div class="rune-card" :class="rune.possibleRunewords?.length === 0 || !rune.possibleRunewords ? 'empty' : ''">
     <div class="rune-card-inner">
       <div class="rune-card-front">
-        <div class="card-wrapper d-flex flex-column p-3 text-center text-visible" :class="rune.possibleRunewords?.length > 0 ? 'highlight' : ''">
+        <div class="card-wrapper d-flex flex-column p-3 text-visible"
+          :class="rune.possibleRunewords?.length > 0 ? 'highlight' : ''">
           <div class="d-flex flex-column align-items-center">
             <div class="d-flex gap-1 align-items-center">
               <img :src="rune.img" :alt="rune.name">
@@ -16,12 +17,13 @@
           </div>
           <div class="drop-rate darken-text">{{ convertDroprate() }}</div>
           <div class="flip-icon" v-if="rune.possibleRunewords?.length > 0"><i class="mdi mdi-orbit-variant"></i></div>
-          <RuneCardOptions v-if="rune.possibleRunewords?.length === 0 && route.name === 'MyRunes'" :rune="rune" :side="'front'" />
+          <RuneCardOptions v-if="rune.possibleRunewords?.length === 0 && route.name === 'MyRunes'" :rune="rune"
+            :side="'front'" />
         </div>
       </div>
       <div class="rune-card-back">
-        <div class="card-wrapper d-flex flex-column p-3 text-center text-visible">
-          <div class="d-flex flex-column align-items-center">
+        <div class="card-wrapper d-flex flex-column p-3 text-visible">
+          <div class="d-flex flex-column align-items-center flex-shrink-1">
             <div class="d-flex gap-1 align-items-center">
               <img :src="rune.img" :alt="rune.name">
               <p class="fs-5" :title="rune.effect">{{ rune.name }}</p>
@@ -29,8 +31,14 @@
             </div>
             <img :src="'/src/assets/img/' + rune.tier + '.png'" :alt="rune.tier" class="rune-tier">
           </div>
-          <div class="possible-runewords d-flex flex-column justify-content-center">
-            <p class="m-0 darken-text" v-for="r in rune.possibleRunewords" :key="r.name">{{ r.name }}</p>
+          <div class="possible-runewords d-flex flex-column">
+            <div class="mb-1" v-for="(r, index) in rune.possibleRunewords" :key="r.name">
+              <div class="outer-border">
+                <img class="corner-decoration corner-left-top" src="../assets/img/corner-decoration-removebg.png">
+                <img class="corner-decoration corner-right-bottom" src="../assets/img/corner-decoration-removebg.png">
+                <p class="m-0 darken-text">{{ r.name }}</p>
+              </div>
+            </div>
           </div>
           <RuneCardOptions :rune="rune" :side="'back'" v-if="route.name === 'MyRunes'" />
         </div>
@@ -44,21 +52,21 @@ import { useRoute } from "vue-router"
 import RuneCardOptions from "./RuneCardOptions.vue"
 
 export default {
-    props: {
-        rune: { type: Object }
-    },
-    setup(props) {
-        const route = useRoute();
-        return {
-            route,
-            convertDroprate() {
-                let leftNum = props.rune.dropRate[0];
-                let rightNum = props.rune.dropRate.substring(2);
-                return (Math.round(((leftNum / rightNum) * 100) * 10000) / 10000) + "%";
-            }
-        };
-    },
-    components: { RuneCardOptions }
+  props: {
+    rune: { type: Object }
+  },
+  setup(props) {
+    const route = useRoute();
+    return {
+      route,
+      convertDroprate() {
+        let leftNum = props.rune.dropRate[0];
+        let rightNum = props.rune.dropRate.substring(2);
+        return (Math.round(((leftNum / rightNum) * 100) * 10000) / 10000) + "%";
+      }
+    };
+  },
+  components: { RuneCardOptions }
 }
 </script>
 
@@ -130,7 +138,8 @@ export default {
   border-radius: 1rem;
   background-color: rgba(0, 0, 0, 0.75);
   display: flex;
-  align-items: center;
+  // align-items: center;
+  // justify-items: center;
   position: relative;
 }
 
@@ -145,7 +154,7 @@ img {
 }
 
 .darken-text {
-  color: rgb(0,185,185);
+  color: rgb(0, 185, 185);
 }
 
 p {
@@ -175,13 +184,37 @@ p {
   color: rgb(105, 1, 105);
   // filter: drop-shadow(0px 0px 1px rgba(105, 1, 105, 0.75));
   animation: beat .25s infinite alternate;
-	transform-origin: center;
+  transform-origin: center;
 }
 
 .possible-runewords {
-  height: 100%;
-  max-height: 100%;
+  flex-grow: 1;
   overflow-y: auto;
+}
+
+.possible-runewords::-webkit-scrollbar {
+  width: 5px;
+  color: white;
+}
+
+.possible-runewords::-webkit-scrollbar-track {
+  background-color: black;
+}
+
+.possible-runewords::-webkit-scrollbar-thumb {
+  background-color: blue;
+  // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.possible-runewords::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 255, 0.639);
+}
+
+.separator {
+  height: 1px;
+  background-color: rgba(206, 205, 206, 0.491);
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .highlight {
@@ -195,7 +228,33 @@ p {
   }
 }
 
-@keyframes beat{
-	to { transform: scale(1.2); }
+@keyframes beat {
+  to {
+    transform: scale(1.2);
+  }
+}
+
+/**border experiment */
+.outer-border {
+  position: relative;
+  border: 2px solid #DE9B72;
+  margin: 0 auto;
+}
+
+.corner-decoration {
+  position: absolute;
+}
+
+.corner-decoration.corner-left-top {
+  left: 0;
+  top: 0;
+}
+
+.corner-decoration.corner-right-bottom {
+  right: 0;
+  bottom: 0;
+  transform: scale(-1);
 }
 </style>
+
+
