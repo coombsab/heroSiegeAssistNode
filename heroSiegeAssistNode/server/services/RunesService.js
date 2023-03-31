@@ -21,26 +21,26 @@ class RunesService {
 
     if (runes.constructor === Array) {
       runes.forEach(rune => {
-        const possibleRunewords = []
+        const possibleRunewords = new Set()
         runewords.forEach(runeword => {
           runeword.runes.forEach(r => {
             if (rune.name === r.name) {
-              possibleRunewords.push(runeword)
+              possibleRunewords.add(runeword)
             }
           })
         })
-        rune.possibleRunewords = possibleRunewords
+        rune.possibleRunewords = [...possibleRunewords]
       })
     } else {
-      const possibleRunewords = []
+      const possibleRunewords = new Set()
         runewords.forEach(runeword => {
           runeword.runes.forEach(r => {
             if (runes.name === r.name) {
-              possibleRunewords.push(runeword)
+              possibleRunewords.add(runeword)
             }
           })
         })
-        runes.possibleRunewords = possibleRunewords
+        runes.possibleRunewords = [...possibleRunewords]
     }
 
     return runes

@@ -1,3 +1,5 @@
+import { formatter } from "../utils/Formatter";
+
 export class Rune {
   constructor(data) {
     this.id = data.id || data._id
@@ -9,5 +11,8 @@ export class Rune {
     this.dropRate = data.dropRate;
     this.img = data.img;
     this.possibleRunewords = data.possibleRunewords || [];
+    this.possibleRunewords.forEach(runeword => {
+      runeword.name = formatter.toTitleCase(runeword.name) || runeword.name;
+    })
   }
 }
