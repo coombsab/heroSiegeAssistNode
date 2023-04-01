@@ -1,5 +1,6 @@
 import { formatter } from "../utils/Formatter";
 import { Ability } from "./Ability";
+import { Item } from "./Item";
 
 export class Runeword {
   constructor(data) {
@@ -16,6 +17,11 @@ export class Runeword {
     if (this.abilities.length > 0) {
       this.abilities.forEach(ability => {
         ability = new Ability(ability)
+      })
+    }
+    if (this.items.length > 0) {
+      this.items.forEach(item => {
+        item = new Item(item)
       })
     }
   }

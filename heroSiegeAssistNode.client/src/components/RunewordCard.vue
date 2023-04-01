@@ -9,8 +9,8 @@
           <p class="m-0 rune-name">{{ r.name }}</p>
         </div>
       </div>
-      <p class="fs-3 text-visible text-center capitalize">{{ runeword.name }}</p>
-      <div class="effects">
+      <p class="mb-2 fs-3 text-visible text-center capitalize">{{ runeword.name }}</p>
+      <div class="effects mb-2">
         <p class="m-0 text-center" v-for="e in runeword.effects" :key="e.id">{{ e.name }}</p>
       </div>
       <div class="abilities">

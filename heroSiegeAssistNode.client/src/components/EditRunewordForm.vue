@@ -39,28 +39,27 @@
 
         <div class="row mb-3">
           <div class="col-12 mb-1">
-            <form @submit.prevent="handleSubmitEffect()">
-              <div class="input-group">
-                <div class="form-floating">
-                  <input type="text" class="form-control bg-dark text-secondary text-lighten-3"
-                    id="floatingInputRunewordEffect" placeholder="Effect Value" v-model="effectEditable.value" required>
-                  <label for="floatingInputRunewordEffect" class="text-secondary text-lighten-3">Effect Value</label>
-                </div>
-                <div class="form-floating">
-                  <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordEffectText"
-                    v-model="effectEditable.text" required>
-                    <option v-for="e in effectsText" :key="e.name" :value="e.name">{{ e.name }}</option>
-                  </select>
-                  <label for="floatingSelectEffectText" class="text-secondary text-lighten-3">Effect Text</label>
-                </div>
-                <button class="rounded-end bg-dark"><i class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
+            <div class="input-group">
+              <div class="form-floating">
+                <input type="text" class="form-control bg-dark text-secondary text-lighten-3"
+                  id="floatingInputRunewordEffect" placeholder="Effect Value" v-model="effectEditable.value" required>
+                <label for="floatingInputRunewordEffect" class="text-secondary text-lighten-3">Effect Value</label>
               </div>
-            </form>
+              <div class="form-floating">
+                <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordEffectText"
+                  v-model="effectEditable.text" required>
+                  <option v-for="e in effectsText" :key="e.name" :value="e.name">{{ e.name }}</option>
+                </select>
+                <label for="floatingSelectEffectText" class="text-secondary text-lighten-3">Effect Text</label>
+              </div>
+              <button @click="handleSubmitEffect()" class="rounded-end bg-dark"><i
+                  class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
+            </div>
           </div>
           <div class="col-12">
             <p class="m-0 text-secondary text-lighten-3 fw-1 px-1">Effects Added:</p>
-            <div class="d-flex gap-1 align-items-center justify-content-between added-item" v-for="i in tempEffects">
-              <p class="m-0 text-secondary no-select">{{ i }}</p>
+            <div class="d-flex gap-1 align-items-center justify-content-between added-item" v-for="eff in editable?.effects">
+              <p class="m-0 text-secondary no-select">{{ eff.name }}</p>
               <button type="button" @click.stop="removeEffect(i)"><i
                   class="mdi mdi-delete-circle text-secondary"></i></button>
             </div>
@@ -69,25 +68,24 @@
 
         <div class="row mb-3">
           <div class="col-12 mb-1">
-            <form @submit.prevent="handleSubmitAbility()">
-              <div class="d-flex justify-content-between gap-4">
-                <div class="input-group">
-                  <div class="form-floating flex-grow-1">
-                    <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordAbility"
-                      v-model="abilityEditable.name">
-                      <option v-for="a in abilities" :key="a?.name" :value="a?.name">{{ a?.name }}</option>
-                    </select>
-                    <label for="floatingSelectAbility" class="text-secondary text-lighten-3">Ability</label>
-                  </div>
-                  <button class="rounded-end bg-dark"><i class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
+            <div class="d-flex justify-content-between gap-4">
+              <div class="input-group">
+                <div class="form-floating flex-grow-1">
+                  <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordAbility"
+                    v-model="abilityEditable.name">
+                    <option v-for="a in abilities" :key="a?.name" :value="a?.name">{{ a?.name }}</option>
+                  </select>
+                  <label for="floatingSelectAbility" class="text-secondary text-lighten-3">Ability</label>
                 </div>
+                <button @click="handleSubmitAbility()" class="rounded-end bg-dark"><i
+                    class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
               </div>
-            </form>
+            </div>
           </div>
           <div class="col-12">
             <p class="m-0 text-secondary text-lighten-3 fw-1 px-1">Abilities Added:</p>
-            <div class="d-flex gap-1 align-items-center justify-content-between added-item" v-for="i in tempAbilities">
-              <p class="m-0 text-secondary no-select">{{ i }}</p>
+            <div class="d-flex gap-1 align-items-center justify-content-between added-item" v-for="abil in editable?.abilities">
+              <p class="m-0 text-secondary no-select">{{ abil.name }}</p>
               <button type="button" @click.stop="removeAbility(i)"><i
                   class="mdi mdi-delete-circle text-secondary"></i></button>
             </div>
@@ -96,52 +94,50 @@
 
         <div class="row">
           <div class="col-12">
-            <form @submit.prevent="handleSubmitRunes()">
-              <div class="input-group">
-                <div class="form-floating">
-                  <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordRunes"
-                    v-model="runeEditable.rune" required>
-                    <option class="rune-option" v-for="r in runes" :value="r.name">{{ r.name }}</option>
-                  </select>
-                  <label for="floatingSelectRunewordRunes" class="text-secondary text-lighten-3">Add Rune</label>
-                </div>
-                <button class="rounded-end bg-dark"><i class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
+            <div class="input-group">
+              <div class="form-floating">
+                <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordRunes"
+                  v-model="runeEditable.rune" required>
+                  <option class="rune-option" v-for="r in runes" :value="r.name">{{ r.name }}</option>
+                </select>
+                <label for="floatingSelectRunewordRunes" class="text-secondary text-lighten-3">Add Rune</label>
               </div>
-            </form>
+              <button @click="handleSubmitRunes()" class="rounded-end bg-dark"><i
+                  class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
+            </div>
             <div class="d-flex gap-1 text-secondary justify-content-end align-items-center">
               <p class="m-0">selected:</p>
-              <p class="m-0" :class="runeEditable.length + tempRunes.length > 6 ? 'rune-alert' : ''">{{
-                runeEditable.length
+              <p class="m-0" :class="editable.runes?.length > 6 ? 'rune-alert' : ''">{{
+                editable.runes?.length
               }}</p>
             </div>
           </div>
           <div class="col-12 mb-3">
             <p class="m-0 text-secondary text-lighten-3 fw-1 px-1">Runes Added:</p>
             <div class="d-flex gap-1 align-items-center justify-content-between added-item"
-              v-for="(r, index) in tempRunes" :key="'edit-' + r + '-' + index">
-              <p class="m-0 text-secondary no-select">{{ r }}</p>
+              v-for="(r, index) in editable?.runes" :key="'edit-' + r + '-' + index">
+              <p class="m-0 text-secondary no-select">{{ r.name }}</p>
               <button type="button" @click.stop="removeRune(index)"><i
                   class="mdi mdi-delete-circle text-secondary"></i></button>
             </div>
           </div>
           <div class="col-12">
-            <form @submit.prevent="handleSubmitItems()">
-              <div class="input-group">
-                <div class="form-floating">
-                  <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordItems"
-                    v-model="itemEditable" multiple required>
-                    <option v-for="i in items" :value="i.name">{{ i.name }}</option>
-                  </select>
-                  <label for="floatingSelectRunewordItems" class="text-secondary text-lighten-3">Add Item</label>
-                </div>
-                <button class="rounded-end bg-dark"><i class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
+            <div class="input-group">
+              <div class="form-floating">
+                <select class="form-select bg-dark text-secondary text-lighten-3" id="floatingSelectRunewordItems"
+                  v-model="itemEditable" multiple required>
+                  <option v-for="i in items" :value="i.name">{{ i.name }}</option>
+                </select>
+                <label for="floatingSelectRunewordItems" class="text-secondary text-lighten-3">Add Item</label>
               </div>
-            </form>
+              <button @click="handleSubmitItems()" class="rounded-end bg-dark"><i
+                  class="mdi mdi-plus text-secondary text-lighten-3"></i></button>
+            </div>
           </div>
           <div class="col-12">
             <p class="m-0 text-secondary text-lighten-3 fw-1 px-1">Items Added:</p>
-            <div class="d-flex gap-1 align-items-center justify-content-between added-item" v-for="i in tempItems">
-              <p class="m-0 text-secondary no-select">{{ i }}</p>
+            <div class="d-flex gap-1 align-items-center justify-content-between added-item" v-for="i in editable?.items">
+              <p class="m-0 text-secondary no-select">{{ i.name }}</p>
               <button type="button" @click.stop="removeItem(i)"><i
                   class="mdi mdi-delete-circle text-secondary"></i></button>
             </div>
@@ -167,45 +163,22 @@ export default {
   setup() {
     const editable = ref({});
     const effectEditable = ref({});
+    const abilityEditable = ref({});
     const runeEditable = ref({});
     const itemEditable = ref([]);
-    const abilityEditable = ref({});
+
 
     watchEffect(() => {
       editable.value = { ...AppState.activeRuneword }
-      if (editable.value.abilities) {
-        editable.value.abilities.forEach(ability => {
-          abilitiesService.addAbilityToRunewordSubmission(ability.name)
-        })
-      }
-      if (editable.value.effects) {
-        editable.value.effects.forEach(Effect => {
-          effectsService.addEffectToRunewordSubmission(Effect.name)
-        })
-      }
-      if (editable.value.runes) {
-        editable.value.runes.forEach(rune => {
-          runesService.addRunesToRunewordSubmission(rune.name)
-        })
-      }
-      let itemsArray = []
-      if (editable.value.items) {
-        editable.value.items.forEach(item => itemsArray.push(item.name))
-      }
-      itemsService.addItemsToRunewordSubmission(itemsArray)
     })
 
     return {
       editable,
       effectEditable,
+      abilityEditable,
       runeEditable,
       itemEditable,
-      abilityEditable,
       effectsText: computed(() => AppState.effectsText),
-      tempRunes: computed(() => AppState.tempRunes),
-      tempItems: computed(() => AppState.tempItems),
-      tempEffects: computed(() => AppState.tempEffects),
-      tempAbilities: computed(() => AppState.tempAbilities),
       runes: computed(() => AppState.runes.sort((a, b) => a.name.localeCompare(b.name))),
       items: computed(() => AppState.items.sort((a, b) => a.name.localeCompare(b.name))),
       abilities: computed(() => AppState.abilities.sort((a, b) => a.name.localeCompare(b.name))),
@@ -229,23 +202,23 @@ export default {
         }
       },
       handleSubmitRunes() {
-        if (this.tempRunes.length <= 6) {
-          runesService.addRunesToRunewordSubmission(runeEditable.value.rune);
+        if (editable.runes.length <= 6) {
+          console.log("Adding rune")
         } else {
           Pop.toast(`Only 6 runes can be added at one time.`, "warning", "center")
         }
       },
       handleSubmitItems() {
-        itemsService.addItemsToRunewordSubmission(itemEditable.value);
+        console.log("Adding item")
       },
       handleSubmitEffect() {
-        effectsService.addEffectToRunewordSubmission(effectEditable.value.value + " " + effectEditable.value.text);
+        console.log("Adding effect")
       },
       handleSubmitAbility() {
-        abilitiesService.addAbilityToRunewordSubmission(abilityEditable.value);
+        console.log("Adding ability")
       },
       checkIfDisable() {
-        if (this.tempEffects.length > 0 && this.tempItems.length > 0 && this.tempRunes.length > 0 && Object.keys(editable.value).length >= 3) {
+        if (editable.effects?.length > 0 && editable.items?.length > 0 && editable.runes?.length > 0 && Object.keys(editable.value).length >= 3) {
           return false;
         }
         else {
