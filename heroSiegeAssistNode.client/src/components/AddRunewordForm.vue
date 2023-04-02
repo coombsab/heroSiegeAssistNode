@@ -111,7 +111,7 @@
             <div class="d-flex gap-1 text-secondary justify-content-end align-items-center">
               <p class="m-0">selected:</p>
               <p class="m-0" :class="runeEditable.length + tempRunes.length > 6 ? 'rune-alert' : ''">{{
-                runeEditable.length
+                tempRunes.length
               }}</p>
             </div>
           </div>
@@ -204,7 +204,7 @@ export default {
         }
       },
       handleSubmitRunes() {
-        if (this.tempRunes.length <= 6) {
+        if (this.tempRunes.length < 6) {
           runesService.addRunesToRunewordSubmission(runeEditable.value.rune);
         } else {
           Pop.toast(`Only 6 runes can be added at one time.`, "warning", "center")

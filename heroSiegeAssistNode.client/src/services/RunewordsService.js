@@ -1,5 +1,6 @@
 import { AppState } from "../AppState"
 import { MyRune } from "../models/MyRune"
+import { Rune } from "../models/Rune"
 import { Runeword } from "../models/Runeword"
 import { api } from "./AxiosService"
 
@@ -63,6 +64,33 @@ class RunewordsService {
     // console.log("abilities after", AppState.tempAbilities)
     // console.log("runes after", AppState.tempRunes)
     // console.log("items after", AppState.tempItems)
+  }
+
+  highlightIfRuneOwned(runeword, rune, index) {
+    const element = document.getElementById(runeword.id + '-' + rune.id + '-' + index)
+    const tempRunes = []
+    AppState.myRunes.forEach(myRune => {
+      tempRunes.push(new MyRune(myRune))
+    })
+
+    if (!element) {
+      return
+    }
+
+    const foundRune = tempRunes.find(myRune => myRune.name === rune.name)
+    if (!foundRune) {
+      console.log(runeword.name + " | " + rune.name + " had no match")
+      return
+    }
+    if (foundRune.quantity >= 1) {
+      console.log(runeword.name + " | " + foundRune.name + " with qty " + foundRune.quantity)
+      foundRune.quantity--
+      element.classList.remove("rune-darken")
+      element.classList.add("rune-brighten")
+    } else {
+      console.log(runeword.name + " | " + foundRune.name + " with qty " + foundRune.quantity)
+      return
+    }    
   }
 
   checkForRunewords() {

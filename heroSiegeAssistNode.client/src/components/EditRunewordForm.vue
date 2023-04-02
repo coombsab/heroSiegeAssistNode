@@ -199,7 +199,7 @@ export default {
         }
       },
       handleSubmitRunes() {
-        if (editable.value.runes.length <= 6) {
+        if (editable.value.runes.length < 6) {
           console.log("Adding rune")
         } else {
           Pop.toast(`Only 6 runes can be added at one time.`, "warning", "center")
