@@ -3,9 +3,8 @@
     <div class="card-wrapper d-flex flex-column p-3">
       <div class="runes-needed d-flex gap-1 flex-wrap justify-content-around px-3">
         <!-- <p v-for="r in runeword.runes" :key="runeword.name + '-' + r.name">{{r.name}}</p> -->
-        <div class="d-flex flex-column align-items-center rune-darken" :class="hasRune(r, index)"
-          v-for="(r, index) in runeword.runes" :key="runeword.id + '-' + r.id + '-' + index"
-          :id="runeword.id + '-' + r.id + '-' + index">
+        <div class="d-flex flex-column align-items-center rune-darken" :class="hasRune(r, index)" v-for="(r, index) in runeword.runes"
+          :key="runeword.id + '-' + r.id + '-' + index" :id="runeword.id + '-' + r.id + '-' + index">
           <img :src="r.img" :alt="r.name">
           <p class="m-0 rune-name">{{ r.name }}</p>
         </div>
@@ -34,6 +33,40 @@ export default {
     runeword: { type: Object }
   },
   setup(props) {
+    function hasRune() {
+      const myRunes = []
+      AppState.myRunes.forEach(myRune => {
+        myRunes.push(new MyRune(myRune))
+      })
+      props.runeword.runes.forEach((rune, index) => {
+        if (myRunes.length === 0) {
+          return
+        }
+
+        const element = document.getElementById(props.runeword.id + '-' + rune.id + '-' + index)
+        if (!element) {
+          return
+        }
+
+        const foundRune = myRunes.find(myRune => myRune.name === rune.name)
+        if (!foundRune) {
+          return
+        }
+        if (foundRune.quantity >= 1) {
+          foundRune.quantity--
+          element.classList.remove("rune-darken")
+          // element.classList.add("rune-brighten")
+
+        } else {
+          return
+        }
+      })
+    }
+
+    onMounted(() => {
+      hasRune()
+    })
+
     return {
       myRunes: computed(() => {
         let tempRunes = []
@@ -59,7 +92,8 @@ export default {
         if (foundRune.quantity >= 1) {
           foundRune.quantity--
           element.classList.remove("rune-darken")
-          element.classList.add("rune-brighten")
+          // element.classList.add("rune-brighten")
+
         } else {
           return
         }
@@ -110,9 +144,9 @@ export default {
   filter: brightness(0.35);
 }
 
-.rune-brighten {
-  // filter: drop-shadow(1px 1px 5px rgba(255, 255, 255, 0.25));
-}
+// .rune-brighten {
+//   filter: drop-shadow(1px 1px 5px rgba(255, 255, 255, 0.25));
+// }
 
 .effects {
   color: rgb(0, 185, 185);
