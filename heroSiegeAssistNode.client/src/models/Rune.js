@@ -3,7 +3,7 @@ import { formatter } from "../utils/Formatter";
 export class Rune {
   constructor(data) {
     this.id = data.id || data._id
-    this.name = data.name;
+    this.name = data.name.toLowerCase() || data.name;
     this.createdAt = data.createdAt;
     this.updatedAt = data.updatedAt;
     this.effect = data.effect;

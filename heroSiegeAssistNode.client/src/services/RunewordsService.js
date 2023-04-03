@@ -79,16 +79,16 @@ class RunewordsService {
 
     const foundRune = tempRunes.find(myRune => myRune.name === rune.name)
     if (!foundRune) {
-      console.log(runeword.name + " | " + rune.name + " had no match")
+      // console.log(runeword.name + " | " + rune.name + " had no match")
       return
     }
     if (foundRune.quantity >= 1) {
-      console.log(runeword.name + " | " + foundRune.name + " with qty " + foundRune.quantity)
+      // console.log(runeword.name + " | " + foundRune.name + " with qty " + foundRune.quantity)
       foundRune.quantity--
       element.classList.remove("rune-darken")
       element.classList.add("rune-brighten")
     } else {
-      console.log(runeword.name + " | " + foundRune.name + " with qty " + foundRune.quantity)
+      // console.log(runeword.name + " | " + foundRune.name + " with qty " + foundRune.quantity)
       return
     }    
   }

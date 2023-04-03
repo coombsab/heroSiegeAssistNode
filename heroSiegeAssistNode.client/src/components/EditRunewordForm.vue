@@ -186,7 +186,7 @@ export default {
       possibleItemTypes: computed(() => AppState.possibleItemTypes),
       async handleSubmit() {
         try {
-          console.log("Submitting edits to runeword", editable.value)
+          // console.log("Submitting edits to runeword", editable.value)
           // await runewordsService.editRuneword(editable.value);
           // editable.value = {};
           effectEditable.value = {};
@@ -200,19 +200,19 @@ export default {
       },
       handleSubmitRunes() {
         if (editable.value.runes.length < 6) {
-          console.log("Adding rune")
+          // console.log("Adding rune")
         } else {
           Pop.toast(`Only 6 runes can be added at one time.`, "warning", "center")
         }
       },
       handleSubmitItems() {
-        console.log("Adding item")
+        // console.log("Adding item")
       },
       handleSubmitEffect() {
-        console.log("Adding effect")
+        // console.log("Adding effect")
       },
       handleSubmitAbility() {
-        console.log("Adding ability")
+        // console.log("Adding ability")
       },
       checkIfDisable() {
         if (editable.value.effects?.length > 0 && editable.value.items?.length > 0 && editable.value.runes?.length > 0 && Object.keys(editable.value).length >= 3) {
@@ -223,16 +223,16 @@ export default {
         }
       },
       removeEffect(effect) {
-        console.log("Removing effect", effect)
+        // console.log("Removing effect", effect)
       },
       removeAbility(ability) {
-        console.log("Removing ability", ability)
+        // console.log("Removing ability", ability)
       },
       removeRune(rune) {
-        console.log("Removing rune", rune)
+        // console.log("Removing rune", rune)
       },
       removeItem(item) {
-        console.log("Removing item", item)
+        // console.log("Removing item", item)
       },
     };
   },
