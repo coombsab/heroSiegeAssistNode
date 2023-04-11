@@ -1,16 +1,22 @@
-
-  {
-    "name": "herosiegeassistnode",
-    "version": "1.0.0",
-    "scripts": {
-      "build": "npm run setup:server",
-      "setup:app": "npm run setup:server && npm run setup:client",
-      "setup:client": "cd heroSiegeAssistNode.client && npm i",
-      "setup:server": "cd heroSiegeAssistNode && npm i",
-      "start": "node heroSiegeAssistNode/index.js"
-    },
-    "engines": {
-      "node": "^16"
-    }
+{
+  "name": "herosiegeassistnode",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "npm run setup:server",
+    "test:unit": "vue-cli-service test:unit",
+    "setup:app": "npm run setup:server && npm run setup:client",
+    "setup:client": "cd heroSiegeAssistNode.client && npm i",
+    "setup:server": "cd heroSiegeAssistNode && npm i",
+    "start": "node heroSiegeAssistNode/index.js"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-unit-jest": "~5.0.0",
+    "@vue/test-utils": "^1.3.5",
+    "@vue/vue2-jest": "^27.0.0-alpha.2",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.5"
+  },
+  "engines": {
+    "node": "^16"
   }
-  
+}
